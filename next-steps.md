@@ -4,11 +4,43 @@
 
 The Nix flake has been created with:
 - ✅ Complete `flake.nix` with correct source and cargo hashes
+- ✅ Pinned to specific commit: `c7ad29a9f9d8b7acd0644b742b5be13bfa118631` (v0.1 release)
 - ✅ README.md with usage instructions
 - ✅ .gitignore for Nix artifacts
 - ✅ justfile for common commands
 - ✅ Git repository initialized with initial commit
 - ✅ flake.lock generated
+- ✅ Published to GitHub: https://github.com/bashfulrobot/nixpkg-waybar-auto-hide
+
+## Version Management
+
+### What Version is Built?
+
+The package is pinned to **v0.1** (commit `c7ad29a9f9`) of waybar_auto_hide.
+
+**When it builds:**
+- For NixOS: When you run `sudo nixos-rebuild switch`
+- For home-manager: When you run `home-manager switch`
+- The package builds from source (no binary cache for custom packages)
+
+**Version locking:**
+- The specific commit hash ensures reproducible builds
+- The hash prevents builds if the source changes unexpectedly
+- Users who reference your flake will always get v0.1 until you update it
+
+### How Users Get Updates
+
+When you add this to your flake:
+```nix
+inputs.waybar-auto-hide.url = "github:bashfulrobot/nixpkg-waybar-auto-hide";
+```
+
+You get whatever version is in the current `main` branch. To get updates:
+```bash
+nix flake update waybar-auto-hide  # Update just this input
+# or
+nix flake update                    # Update all inputs
+```
 
 ## Immediate Next Steps
 
@@ -122,14 +154,34 @@ environment.systemPackages = [
 ## Maintenance
 
 ### Updating to New Versions
-When the upstream repository updates:
 
-1. Update the `rev` in flake.nix to the new commit/tag
-2. Run `nix build` to get the new source hash
-3. Update the `hash` field
-4. Run `nix build` again to get the new cargoHash
-5. Update the `cargoHash` field
-6. Test and commit
+When the upstream waybar_auto_hide repository releases a new version:
+
+1. **Find the new commit hash** from the upstream repository
+2. **Update `rev` in flake.nix** to the new commit hash
+3. **Clear the hashes** (set both to `sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=`)
+4. **Build to get source hash:**
+   ```bash
+   nix build .#waybar-auto-hide 2>&1 | grep "got:"
+   # Copy the hash from the output
+   ```
+5. **Update the `hash` field** with the correct source hash
+6. **Build again to get cargo hash:**
+   ```bash
+   nix build .#waybar-auto-hide 2>&1 | grep "got:"
+   # Copy the cargoHash from the output
+   ```
+7. **Update the `cargoHash` field** with the correct cargo hash
+8. **Update `version` in flake.nix** to match the new release
+9. **Test the build:** `nix build .#waybar-auto-hide`
+10. **Commit and push:**
+    ```bash
+    git add flake.nix
+    git commit -m "Update to version X.Y.Z"
+    git push
+    ```
+
+Users can then update by running `nix flake update waybar-auto-hide` in their configurations.
 
 ### Useful Commands
 ```bash

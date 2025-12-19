@@ -20,7 +20,7 @@
             src = pkgs.fetchFromGitHub {
               owner = "Zephirus2";
               repo = "waybar_auto_hide";
-              rev = "master";
+              rev = "c7ad29a9f9d8b7acd0644b742b5be13bfa118631"; # v0.1 release
               hash = "sha256-o8pCV6xkSkQs1XKGTP3RyN1JTHLrcSSDDCnvGMjJ0Xc=";
             };
 
