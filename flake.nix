@@ -24,6 +24,12 @@
               hash = "sha256-o8pCV6xkSkQs1XKGTP3RyN1JTHLrcSSDDCnvGMjJ0Xc=";
             };
 
+            # Patch to use .waybar-wrapped process name (NixOS wrapper)
+            postPatch = ''
+              substituteInPlace src/main.rs \
+                --replace-fail '"waybar"' '".waybar-wrapped"'
+            '';
+
             cargoHash = "sha256-jo5qapLIb5BlttxKtF3sIziZVBb52Uju+6G8A9Bv8Io=";
 
             meta = with pkgs.lib; {
