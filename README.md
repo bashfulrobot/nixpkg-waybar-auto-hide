@@ -17,7 +17,7 @@ Add this flake to your `flake.nix` inputs:
 ```nix
 {
   inputs = {
-    waybar-auto-hide.url = "github:YOUR_USERNAME/waybar_auto_hide";
+    waybar-auto-hide.url = "github:bashfulrobot/nixpkg-waybar-auto-hide";
   };
 }
 ```
@@ -33,13 +33,13 @@ environment.systemPackages = [
 ### Direct Installation
 
 ```bash
-nix profile install github:YOUR_USERNAME/waybar_auto_hide
+nix profile install github:bashfulrobot/nixpkg-waybar-auto-hide
 ```
 
 ### Run Without Installing
 
 ```bash
-nix run github:YOUR_USERNAME/waybar_auto_hide
+nix run github:bashfulrobot/nixpkg-waybar-auto-hide
 ```
 
 ## Configuration
