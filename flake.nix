@@ -21,10 +21,10 @@
               owner = "Zephirus2";
               repo = "waybar_auto_hide";
               rev = "master";
-              hash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
+              hash = "sha256-o8pCV6xkSkQs1XKGTP3RyN1JTHLrcSSDDCnvGMjJ0Xc=";
             };
 
-            cargoHash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
+            cargoHash = "sha256-jo5qapLIb5BlttxKtF3sIziZVBb52Uju+6G8A9Bv8Io=";
 
             meta = with pkgs.lib; {
               description = "Lightweight utility that automatically shows/hides Waybar in Hyprland based on cursor position and window state";
